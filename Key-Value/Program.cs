@@ -22,12 +22,12 @@ namespace Key_Value
 
         }
     }
-    public struct KeyValue
+    public struct KeyValue<K,T>
     {
-        public readonly string Key;
-        public readonly object Value;
+        public readonly K Key;
+        public readonly T Value;
 
-        public KeyValue(string x, object y)
+        public KeyValue(K x, T y)
         {
             Key = x;
             Value = y;
@@ -38,7 +38,7 @@ namespace Key_Value
     public class MyDictionary // this class is the indexer
     {
         public int count = 0;// used as the iterator for the set so you don't iterate over null values om keyArray, counts all valid inputs
-        public KeyValue[] keyArray = new KeyValue[10];
+        public KeyValue<string,object>[] keyArray = new KeyValue<string,object>[10];
         bool match = false; // used as bool for if the key already exists
         public object this[string key]   // key is the indexer
                                          //indexers are taking the struct and assigning index values to them
@@ -55,7 +55,7 @@ namespace Key_Value
                 }
                 if (!match)
                 {
-                    keyArray[count] = new KeyValue(key, value);
+                    keyArray[count] = new KeyValue<string,object>(key, value);
                     count++;
                 }
             }
